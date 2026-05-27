@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishGuard — Phishing Awareness Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SCAN LINE OVERLAY -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">⚠</span>
+      <span class="brand-name">PHISH<span class="accent">GUARD</span></span>
+    </div>
+    <div class="nav-progress">
+      <span class="progress-label">MODULE PROGRESS</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="globalProgress"></div>
+      </div>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" data-section="0">INTRO</button>
+      <button class="nav-btn" data-section="1">RECOGNIZE</button>
+      <button class="nav-btn" data-section="2">TACTICS</button>
+      <button class="nav-btn" data-section="3">DEFENSE</button>
+      <button class="nav-btn" data-section="4">QUIZ</button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="section hero-section active" id="sec-0">
+    <div class="hero-bg">
+      <div class="grid-overlay" aria-hidden="true"></div>
+      <div class="glitch-text" aria-hidden="true">PHISHING</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">SECURITY AWARENESS TRAINING</div>
+      <h1 class="hero-title">DON'T TAKE<br/><span class="accent-stroke">THE BAIT</span></h1>
+      <p class="hero-sub">Every 39 seconds, a cyberattack occurs. Learn how to identify phishing attempts, social engineering tactics, and protect yourself online.</p>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num">3.4B</span>
+          <span class="stat-label">Phishing emails sent daily</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">90%</span>
+          <span class="stat-label">Of breaches involve phishing</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">$17.7K</span>
+          <span class="stat-label">Lost per minute to cybercrime</span>
+        </div>
+      </div>
+      <button class="cta-btn" data-goto="1">BEGIN TRAINING <span>→</span></button>
+    </div>
+  </section>
+
+  <!-- SECTION 1: RECOGNIZE PHISHING -->
+  <section class="section" id="sec-1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">RECOGNIZING <span class="accent">PHISHING</span></h2>
+      <p class="section-desc">Learn the telltale signs of phishing emails and fake websites before attackers exploit them.</p>
+    </div>
+
+    <div class="cards-row">
+      <div class="info-card reveal">
+        <div class="card-icon">📧</div>
+        <h3>Email Red Flags</h3>
+        <ul class="checklist">
+          <li><span class="check-icon warn">!</span> Urgent language — "Act NOW or lose access"</li>
+          <li><span class="check-icon warn">!</span> Mismatched sender address (e.g. support@paypa1.com)</li>
+          <li><span class="check-icon warn">!</span> Generic greetings — "Dear Customer"</li>
+          <li><span class="check-icon warn">!</span> Suspicious attachments (.exe, .zip, .docm)</li>
+          <li><span class="check-icon warn">!</span> Requests for login credentials or SSN</li>
+          <li><span class="check-icon warn">!</span> Spelling and grammar errors</li>
+        </ul>
+      </div>
+
+      <div class="info-card reveal">
+        <div class="card-icon">🌐</div>
+        <h3>Fake Website Clues</h3>
+        <ul class="checklist">
+          <li><span class="check-icon warn">!</span> URL uses HTTP instead of HTTPS</li>
+          <li><span class="check-icon warn">!</span> Domain typosquatting (paypa1.com, g00gle.com)</li>
+          <li><span class="check-icon warn">!</span> Padlock icon does NOT mean a site is safe</li>
+          <li><span class="check-icon warn">!</span> Poor design — pixelated logos, broken layouts</li>
+          <li><span class="check-icon warn">!</span> Pop-ups demanding immediate action</li>
+          <li><span class="check-icon warn">!</span> Missing privacy policy / contact info</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE EMAIL DEMO -->
+    <div class="demo-container reveal">
+      <div class="demo-label">⚡ INTERACTIVE: SPOT THE PHISHING EMAIL</div>
+      <div class="fake-email" id="emailDemo">
+        <div class="email-header">
+          <div class="email-field"><span class="field-label">FROM:</span> <span class="email-from suspicious" data-tip="⚠ Domain is 'paypa1.com' — notice the number '1' instead of letter 'l'">security@paypa1.com</span></div>
+          <div class="email-field"><span class="field-label">TO:</span> <span>you@yourcompany.com</span></div>
+          <div class="email-field"><span class="field-label">SUBJECT:</span> <span class="suspicious" data-tip="⚠ Urgent subject line creates panic — a classic pressure tactic">🚨 URGENT: Your account has been SUSPENDED</span></div>
+        </div>
+        <div class="email-body">
+          <p>Dear <span class="suspicious" data-tip="⚠ Legitimate companies use your real name — 'Valued Customer' is a red flag">Valued Customer</span>,</p>
+          <p>We have detected <span class="suspicious" data-tip="⚠ Vague threat designed to create fear without details">suspicious activity</span> on your PayPal account. Your account access has been <strong>temporarily suspended</strong>.</p>
+          <p>To restore your account, please <span class="suspicious" data-tip="⚠ Never click links in suspicious emails. Hover to see the real destination">verify your information immediately</span> by clicking below:</p>
+          <a href="#" class="phishing-link suspicious" data-tip="⚠ This link leads to a fake site — note 'paypa1-secure.ru' not 'paypal.com'" onclick="return false;">→ Verify My Account Now</a>
+          <p class="small-text">Failure to verify within <span class="suspicious" data-tip="⚠ Artificial deadline creates urgency — common manipulation tactic">24 HOURS</span> will result in permanent account closure.</p>
+          <p>Regards,<br/><span class="suspicious" data-tip="⚠ PayPal always signs with their official brand. 'PayPal Security Team' is vague.">PayPal Security Team</span></p>
+        </div>
+        <div class="demo-hint">👆 <strong>HOVER</strong> over highlighted text to reveal phishing indicators</div>
+      </div>
+      <div id="emailTooltip" class="email-tooltip hidden"></div>
+    </div>
+
+    <div class="section-nav">
+      <button class="nav-arrow" data-goto="0">← BACK</button>
+      <button class="nav-arrow primary" data-goto="2">NEXT: TACTICS →</button>
+    </div>
+  </section>
+
+  <!-- SECTION 2: SOCIAL ENGINEERING TACTICS -->
+  <section class="section" id="sec-2">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">SOCIAL ENGINEERING <span class="accent">TACTICS</span></h2>
+      <p class="section-desc">Attackers exploit human psychology, not just technology. Understand their playbook.</p>
+    </div>
+
+    <div class="tactics-grid">
+      <div class="tactic-card reveal" data-tactic="pretexting">
+        <div class="tactic-header">
+          <span class="tactic-icon">🎭</span>
+          <span class="tactic-threat">HIGH THREAT</span>
+        </div>
+        <h3>PRETEXTING</h3>
+        <p>Attackers invent a fabricated scenario to extract information — posing as IT support, bank auditors, or HR personnel to gain your trust.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>In 2020, Twitter attackers called employees pretending to be IT support, convinced them to hand over credentials, then hijacked accounts of Obama, Musk, and Biden to run a Bitcoin scam netting $121,000.</p>
+        </div>
+      </div>
+
+      <div class="tactic-card reveal" data-tactic="spearphishing">
+        <div class="tactic-header">
+          <span class="tactic-icon">🎯</span>
+          <span class="tactic-threat high">CRITICAL</span>
+        </div>
+        <h3>SPEAR PHISHING</h3>
+        <p>Highly targeted attacks using personal information gathered from social media, LinkedIn, and company websites to craft convincing, personalized emails.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>The 2016 Podesta email hack used a spear-phishing email that mimicked a Google security alert. An aide called it "legitimate" instead of "illegitimate" — a typo that cost the DNC dearly.</p>
+        </div>
+      </div>
+
+      <div class="tactic-card reveal" data-tactic="vishing">
+        <div class="tactic-header">
+          <span class="tactic-icon">📞</span>
+          <span class="tactic-threat">HIGH THREAT</span>
+        </div>
+        <h3>VISHING (VOICE)</h3>
+        <p>Phone-based phishing where attackers call victims impersonating banks, government agencies (IRS, police), or tech support to extract personal data or payment.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>IRS impersonation scams have cost Americans over $80 million. Attackers threaten arrest unless victims buy gift cards and read the codes over the phone.</p>
+        </div>
+      </div>
+
+      <div class="tactic-card reveal" data-tactic="smishing">
+        <div class="tactic-header">
+          <span class="tactic-icon">💬</span>
+          <span class="tactic-threat">MEDIUM THREAT</span>
+        </div>
+        <h3>SMISHING (SMS)</h3>
+        <p>Phishing via text messages — fake delivery notifications, bank alerts, or prize wins with malicious links designed for mobile screens where URLs are truncated.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>The FedEx smishing campaign of 2021 sent millions of texts claiming a package needed a delivery address update, stealing payment info from victims who clicked the link.</p>
+        </div>
+      </div>
+
+      <div class="tactic-card reveal" data-tactic="baiting">
+        <div class="tactic-header">
+          <span class="tactic-icon">💾</span>
+          <span class="tactic-threat">MEDIUM THREAT</span>
+        </div>
+        <h3>BAITING</h3>
+        <p>Physical or digital lures — infected USB drives left in parking lots, "free" movie downloads, or fake software updates that install malware when executed.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>A study found 45% of people plug in USB drives they find in public — a technique reportedly used to breach sensitive industrial facilities.</p>
+        </div>
+      </div>
+
+      <div class="tactic-card reveal" data-tactic="qrishing">
+        <div class="tactic-header">
+          <span class="tactic-icon">📷</span>
+          <span class="tactic-threat">EMERGING</span>
+        </div>
+        <h3>QUISHING (QR CODE)</h3>
+        <p>Malicious QR codes placed over legitimate ones — in parking meters, restaurants, or emailed as "multi-factor authentication" bypasses — leading to fake login pages.</p>
+        <div class="real-world">
+          <div class="rw-label">REAL WORLD CASE</div>
+          <p>In 2023, the FBI issued a warning about fake QR codes at parking meters in multiple cities, redirecting payment to attacker-controlled accounts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PSYCHOLOGICAL TRIGGERS -->
+    <div class="psych-section reveal">
+      <h3 class="psych-title">THE PSYCHOLOGY PLAYBOOK</h3>
+      <div class="psych-triggers">
+        <div class="trigger-item">
+          <span class="trigger-icon">⏰</span>
+          <span class="trigger-name">URGENCY</span>
+          <span class="trigger-desc">"Act in 24 hours or lose your account"</span>
+        </div>
+        <div class="trigger-item">
+          <span class="trigger-icon">😨</span>
+          <span class="trigger-name">FEAR</span>
+          <span class="trigger-desc">"Your account has been hacked"</span>
+        </div>
+        <div class="trigger-item">
+          <span class="trigger-icon">🤩</span>
+          <span class="trigger-name">GREED</span>
+          <span class="trigger-desc">"You've won a $1,000 gift card"</span>
+        </div>
+        <div class="trigger-item">
+          <span class="trigger-icon">🤝</span>
+          <span class="trigger-name">AUTHORITY</span>
+          <span class="trigger-desc">"Message from your CEO / IRS / FBI"</span>
+        </div>
+        <div class="trigger-item">
+          <span class="trigger-icon">💖</span>
+          <span class="trigger-name">TRUST</span>
+          <span class="trigger-desc">Mimics logos and branding you recognize</span>
+        </div>
+        <div class="trigger-item">
+          <span class="trigger-icon">👥</span>
+          <span class="trigger-name">SOCIAL PROOF</span>
+          <span class="trigger-desc">"Your colleague already verified"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-nav">
+      <button class="nav-arrow" data-goto="1">← BACK</button>
+      <button class="nav-arrow primary" data-goto="3">NEXT: DEFENSE →</button>
+    </div>
+  </section>
+
+  <!-- SECTION 3: BEST PRACTICES -->
+  <section class="section" id="sec-3">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">YOUR DEFENSE <span class="accent">PLAYBOOK</span></h2>
+      <p class="section-desc">Build habits that make you a hard target. These are your shields against phishing attacks.</p>
+    </div>
+
+    <div class="defense-layers">
+      <div class="layer-card reveal">
+        <div class="layer-num">LAYER 1</div>
+        <div class="layer-icon">🔍</div>
+        <h3>VERIFY BEFORE YOU CLICK</h3>
+        <div class="tips-list">
+          <div class="tip">Hover over links to preview the real URL before clicking</div>
+          <div class="tip">Go directly to websites by typing the URL instead of clicking email links</div>
+          <div class="tip">Call the sender via a known number to confirm unexpected requests</div>
+          <div class="tip">Check the full sender email — not just the display name</div>
+        </div>
+      </div>
+
+      <div class="layer-card reveal">
+        <div class="layer-num">LAYER 2</div>
+        <div class="layer-icon">🔐</div>
+        <h3>SECURE YOUR ACCOUNTS</h3>
+        <div class="tips-list">
+          <div class="tip">Enable Multi-Factor Authentication (MFA) on ALL accounts</div>
+          <div class="tip">Use a password manager — unique passwords for every site</div>
+          <div class="tip">Never reuse passwords across banking, work, and social accounts</div>
+          <div class="tip">Use hardware security keys (YubiKey) for critical accounts</div>
+        </div>
+      </div>
+
+      <div class="layer-card reveal">
+        <div class="layer-num">LAYER 3</div>
+        <div class="layer-icon">🛡️</div>
+        <h3>TECHNICAL SAFEGUARDS</h3>
+        <div class="tips-list">
+          <div class="tip">Keep OS, browser, and apps updated — patches close exploits</div>
+          <div class="tip">Use email filtering (Gmail, Outlook) with anti-phishing enabled</div>
+          <div class="tip">Install reputable security software with real-time protection</div>
+          <div class="tip">Enable DNS filtering (Cloudflare 1.1.1.2, Quad9) to block malicious domains</div>
+        </div>
+      </div>
+
+      <div class="layer-card reveal">
+        <div class="layer-num">LAYER 4</div>
+        <div class="layer-icon">📢</div>
+        <h3>REPORT & RESPOND</h3>
+        <div class="tips-list">
+          <div class="tip">Report phishing emails using your mail client's built-in report button</div>
+          <div class="tip">Forward suspicious emails to reportphishing@apwg.org or phishing@irs.gov</div>
+          <div class="tip">If you clicked a link — immediately change passwords and contact IT</div>
+          <div class="tip">Report to IC3.gov (FBI) if you lost money to a scam</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- URL CHECKER TOOL -->
+    <div class="tool-container reveal">
+      <div class="tool-label">🔎 URL SUSPICION ANALYZER</div>
+      <div class="url-checker">
+        <input type="text" id="urlInput" class="url-input" placeholder="Paste a suspicious URL here…" />
+        <button class="check-btn" id="checkUrl">ANALYZE →</button>
+      </div>
+      <div id="urlResult" class="url-result hidden"></div>
+    </div>
+
+    <div class="section-nav">
+      <button class="nav-arrow" data-goto="2">← BACK</button>
+      <button class="nav-arrow primary" data-goto="4">TAKE THE QUIZ →</button>
+    </div>
+  </section>
+
+  <!-- SECTION 4: QUIZ -->
+  <section class="section" id="sec-4">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">KNOWLEDGE <span class="accent">QUIZ</span></h2>
+      <p class="section-desc">Test what you've learned. 8 questions — can you score 100%?</p>
+    </div>
+
+    <div class="quiz-container" id="quizContainer">
+      <!-- Rendered by JS -->
+    </div>
+
+    <div class="quiz-result hidden" id="quizResult">
+      <div class="result-icon" id="resultIcon"></div>
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-label" id="resultLabel"></div>
+      <div class="result-breakdown" id="resultBreakdown"></div>
+      <button class="cta-btn" id="retakeBtn">RETAKE QUIZ</button>
+    </div>
+
+    <div class="section-nav" id="quizNav">
+      <button class="nav-arrow" data-goto="3">← BACK TO DEFENSE</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">PHISH<span class="accent">GUARD</span> — SECURITY AWARENESS TRAINING</div>
+    <div class="footer-note">This training module is for educational purposes. Stay vigilant. Stay safe.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
